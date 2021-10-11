@@ -1,0 +1,72 @@
+<link rel='stylesheet' href='node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='main.css'>
+
+<h1>Comunicacion Indirecta Pub-Sub</h1>
+
+<h2> Publicador </h2>
+
+<div id='pub-addition' class='textbox-btn'>
+	<input type='text' class='form-control' placeholder='Nombre del Publicador'>
+	<button class='btn btn-default'>Add</button>
+	<button class='btn btn-default'>Remove</button>
+</div>
+
+<div id='publisher-list'>
+	{{#publishers}}
+	<div class='publisher'>
+		<h4>{{name}}</h4>
+		<input type='text' class='form-control' placeholder='Tema'>
+		<textarea  class='form-control' placeholder='Contenido del tema'></textarea>
+		<button class='btn btn-default'>Publicar</button>
+
+		<ul>
+			{{#works}}
+			<li> 
+				<b>{{topic}}</b><br>
+				{{payload}}
+			</li>
+			{{/works}}
+		</ul>
+	</div>
+	{{/publishers}}
+	<br style='clear:both' />
+</div>
+
+<h2> Suscriptores </h2>
+
+<div id='sub-addition' class='textbox-btn'>
+	<input type='text' class='form-control' placeholder='Nombre del suscriptor'>
+	<button class='btn btn-default'>Add</button>
+	<button class='btn btn-default'>Remove</button>
+</div>
+
+<div id='subscriber-list'>
+	{{#subscribers}}
+	<div class='subscriber'>
+		<h4>{{name}}</h4>
+		<input type='text' class='form-control' placeholder='Tema'>
+		<button class='btn btn-default'>Subscribe</button>
+		<h6>Temas Suscritos</h6>
+		<ul class='topics'>
+			{{#topics}}
+			<li> {{.}}
+			{{/topics}}
+		</ul>
+
+		<h6>Noticias</h6>
+		<ul class='notifications'>
+			{{#notifications}}
+			<li> <b>{{topic}}: </b>{{payload}} - <i>{{name}}</i>
+			{{/notifications}}
+			<!-- {{^notifications}} <b> All caught up! :) </b> {{/notifications}} -->
+		</ul>
+	</div>
+	{{/subscribers}}
+	<br style='clear:both' />
+</div>
+
+<script src='node_modules/jquery/dist/jquery.js'></script>
+<script src='node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src='node_modules/mustache/mustache.js'></script>
+<script src='pubsub.js'></script>
+<script src='scripts.js'></script>
